@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("video_title", videoItem.title)
             startActivity(intent)
         }
+        loadData()
+        showPage(0)  // 显示第一页
          //监听滚动事件，实现分页
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int){
@@ -66,7 +68,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-//        loadData();
     }
 // ========== 加载下一页 ==========
 private fun loadNextPage(recyclerView: RecyclerView) {
