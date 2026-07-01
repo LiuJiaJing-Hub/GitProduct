@@ -4,14 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.view.WindowCompat
 
-class LoginActivit : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     private var username: String = ""
     private var password: String = ""
     private lateinit var et_username: AppCompatEditText
@@ -20,6 +21,11 @@ class LoginActivit : AppCompatActivity() {
     private var eyeOpen : Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        // 关键代码：状态栏图标白色
+        val controller = WindowCompat.getInsetsController(window, window.decorView)
+        // false = 白色图标；true = 黑色图标
+        controller.isAppearanceLightStatusBars = false
         setContentView(R.layout.activity_login)
         et_username= findViewById(R.id.et_username)
         et_password= findViewById(R.id.et_password)

@@ -9,8 +9,6 @@
     android:background="@drawable/ic_backguand"
     android:orientation="vertical">
 
-
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
@@ -45,7 +43,8 @@
             android:textColor="#FFFFFF"
             android:textCursorDrawable="@null"
             android:background="@null"
-            android:hint="Password"/>
+            android:hint="Password"
+            android:inputType="textPassword"/>
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_eye"
             android:layout_width="40dp"
@@ -53,7 +52,6 @@
             android:contentDescription="Toggle password visibility"
             android:paddingEnd="12dp"
             android:src="@drawable/icon_eye_closs"/>
-        android:hint="Password"/>
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton

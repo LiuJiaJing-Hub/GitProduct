@@ -1,9 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.VodeoDemo" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- 状态栏直接设为透明（覆盖 colorPrimary 的默认行为） -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+<!--        <item name="android:windowTranslucentStatus">true</item>-->
+        <!-- windowDrawsSystemBarBackgrounds：允许页面绘制覆盖状态栏区域 -->
+        <!--windowTranslucentStatus状态栏完全透明，页面背景向上填充-->
     </style>
-
+    <!-- 深色页面专用主题：登录页、播放器，状态栏图标白色 -->
+    <style name="Theme.DarkEdgeToEdge" parent="Base.Theme.VodeoDemo">
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
     <style name="Theme.VodeoDemo" parent="Base.Theme.VodeoDemo" />
 </resources>
