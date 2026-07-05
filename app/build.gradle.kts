@@ -4,24 +4,45 @@ plugins {
 }
 
 android {
-    namespace = "com.hzmct.vodeodemo"
-    compileSdk {
-        version = release(36)
-    }
+    namespace = "com.app.video.user"
+    compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.hzmct.vodeodemo"
+        applicationId = "com.app.video.user"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        
+        // 过滤多余的so库，只保留主流架构，减少包体积
+        ndk {
+            abiFilters.add("armeabi-v7a")
+            abiFilters.add("arm64-v8a")
+            // 如果不需要支持很老的 x86 设备或模拟器，通常这两个就够了
+            // abiFilters.add("x86")
+            // abiFilters.add("x86_64")
+        }
+        
+        // 只保留指定的语言资源（如中文和英文），去除无用的国际化资源
+        resourceConfigurations.addAll(listOf("en", "zh-rCN"))
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 
     buildTypes {
-        release {
+        debug {
             isMinifyEnabled = false
+            isShrinkResources = false
+            // 可以开启这个选项加快 debug 构建速度，但在 debug 时就无法测试 R8 混淆后的情况
+            // proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        release {
+            isMinifyEnabled = true // 开启 R8 代码混淆压缩
+            isShrinkResources = true // 开启资源压缩，必须和 isMinifyEnabled 一起使用
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -29,45 +50,32 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
+}
+
+kotlin {
+    jvmToolchain(17)
 }
 
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.appcompat)
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.okhttp)
+    implementation(libs.gson)
+    implementation(libs.eventbus)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("androidx.media3:media3-exoplayer:1.10.1")
-    implementation("androidx.media3:media3-ui:1.10.1")
-    implementation("androidx.media3:media3-common:1.10.1")
-
-    implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.appcompat:appcompat:1.7.0")
-
-    implementation("androidx.fragment:fragment-ktx:1.8.2")
-
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
-
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
-
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
-
-    // 图片加载
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-
-    // ViewPager2（轮播图）
-    implementation("androidx.viewpager2:viewpager2:1.0.0")
-
 }
