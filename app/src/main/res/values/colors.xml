@@ -8,4 +8,8 @@
     <color name="surface_card">#FFFFFFFF</color>
     <color name="text_primary">#1F2937</color>
     <color name="text_secondary">#6B7280</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#303F9F</color>
 </resources>

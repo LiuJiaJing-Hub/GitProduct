@@ -1,7 +1,9 @@
 package com.app.video.user.page.home.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.app.video.user.core.auth.TokenManager
 import com.app.video.user.databinding.ActivityMainBinding
 
 /**
@@ -20,6 +22,12 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (!TokenManager(this).isLogin()) {
+            startActivity(Intent(this, AuthActivity::class.java))
+            finish()
+            return
+        }
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

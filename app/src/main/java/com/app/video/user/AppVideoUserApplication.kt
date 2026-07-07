@@ -3,6 +3,7 @@ package com.app.video.user
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import com.app.video.user.core.auth.TokenManager
 import com.app.video.user.core.service.NetService
 
 /**
@@ -32,7 +33,9 @@ class AppVideoUserApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
-        NetService.startService(this)
+        if (TokenManager(this).isLogin()) {
+            NetService.startService(this)
+        }
     }
 
     /**

@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
 
     <application
         android:name=".AppVideoUserApplication"
@@ -24,7 +25,12 @@
             android:exported="false"
             android:foregroundServiceType="dataSync" />
         <activity
-            android:name=".page.home.MainActivity"
+            android:name=".page.home.ui.MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppVideoUser">
+        </activity>
+        <activity
+            android:name=".page.home.ui.AuthActivity"
             android:exported="true"
             android:theme="@style/Theme.AppVideoUser">
             <intent-filter>

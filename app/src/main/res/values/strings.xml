@@ -10,4 +10,13 @@
     <string name="main_message_hint">请输入待发送消息</string>
     <string name="main_received_label">消息日志</string>
     <string name="main_default_topic">video-room</string>
+
+
+    <string name="action_settings">Settings</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="please_enter_password">请输入密码</string>
+    <string name="please_enter_email">请输入账号</string>
+    <string name="login">Login</string>
+
 </resources>
