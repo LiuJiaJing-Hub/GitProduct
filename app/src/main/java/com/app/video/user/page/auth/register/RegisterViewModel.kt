@@ -1,6 +1,6 @@
-package com.app.video.user.page.home.viewmodel
+package com.app.video.user.page.auth.register
 
-import com.app.video.user.core.auth.AuthRepository
+import com.app.video.user.domain.repository.AuthRepository
 import com.app.video.user.core.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

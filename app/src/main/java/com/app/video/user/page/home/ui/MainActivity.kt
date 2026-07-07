@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.app.video.user.core.auth.TokenManager
 import com.app.video.user.databinding.ActivityMainBinding
+import com.app.video.user.page.auth.AuthActivity
 
 /**
  * 应用的首页 Activity。

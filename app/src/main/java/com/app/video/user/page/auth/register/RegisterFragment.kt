@@ -1,20 +1,19 @@
-package com.app.video.user.page.home.ui
+package com.app.video.user.page.auth.register
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.app.video.user.databinding.FragmentRegisterBinding
-import com.app.video.user.page.home.viewmodel.RegisterEvent
-import com.app.video.user.page.home.viewmodel.RegisterUiState
-import com.app.video.user.page.home.viewmodel.RegisterViewModel
+import com.app.video.user.page.auth.AuthActivity
 import kotlinx.coroutines.launch
+
 /**
  * 注册页面 Fragment。
  *

@@ -1,4 +1,4 @@
-package com.app.video.user.page.home.ui
+package com.app.video.user.page.auth.forgot
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.app.video.user.databinding.FragmentForgotPasswordBinding
-import com.app.video.user.page.home.viewmodel.ForgotPasswordEvent
-import com.app.video.user.page.home.viewmodel.ForgotPasswordUiState
-import com.app.video.user.page.home.viewmodel.ForgotPasswordViewModel
+import com.app.video.user.page.auth.AuthActivity
 import kotlinx.coroutines.launch
 
 class ForgotPasswordFragment : Fragment() {

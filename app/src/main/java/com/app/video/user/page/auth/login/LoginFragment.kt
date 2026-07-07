@@ -1,4 +1,4 @@
-package com.app.video.user.page.home.ui
+package com.app.video.user.page.auth.login
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
@@ -11,9 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.app.video.user.databinding.FragmentLoginBinding
-import com.app.video.user.page.home.viewmodel.LoginEvent
-import com.app.video.user.page.home.viewmodel.LoginUiState
-import com.app.video.user.page.home.viewmodel.LoginViewModel
+import com.app.video.user.page.auth.AuthActivity
 import kotlinx.coroutines.launch
 /**
  * 登录页面 Fragment。

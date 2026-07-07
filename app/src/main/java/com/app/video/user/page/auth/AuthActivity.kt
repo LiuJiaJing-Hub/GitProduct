@@ -1,4 +1,4 @@
-package com.app.video.user.page.home.ui
+package com.app.video.user.page.auth
 
 /**
  * @liuJiaJing
@@ -10,6 +10,10 @@ import androidx.fragment.app.FragmentManager
 import com.app.video.user.core.auth.TokenManager
 import com.app.video.user.core.service.NetService
 import com.app.video.user.databinding.ActivityAuthBinding
+import com.app.video.user.page.auth.forgot.ForgotPasswordFragment
+import com.app.video.user.page.auth.login.LoginFragment
+import com.app.video.user.page.auth.register.RegisterFragment
+import com.app.video.user.page.main.MainActivity
 
 class AuthActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAuthBinding

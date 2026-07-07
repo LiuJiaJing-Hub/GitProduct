@@ -1,4 +1,4 @@
-package com.app.video.user.core.auth
+package com.app.video.user.domain.model
 
 
 /**

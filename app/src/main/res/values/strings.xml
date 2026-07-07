@@ -19,4 +19,10 @@
     <string name="please_enter_email">请输入账号</string>
     <string name="login">Login</string>
 
+    <string name="main_tab_home">首页</string>
+    <string name="main_tab_channel">频道</string>
+    <string name="main_tab_short_drama">短剧</string>
+    <string name="main_tab_vip">会员</string>
+    <string name="main_tab_mine">我的</string>
+
 </resources>

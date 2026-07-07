@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tabHome"
+        android:icon="@drawable/ic_tab_home"
+        android:title="@string/main_tab_home" />
+
+    <item
+        android:id="@+id/tabChannel"
+        android:icon="@drawable/ic_tab_channel"
+        android:title="@string/main_tab_channel" />
+
+    <item
+        android:id="@+id/tabShortDrama"
+        android:icon="@drawable/ic_tab_short_drama"
+        android:title="@string/main_tab_short_drama" />
+
+    <item
+        android:id="@+id/tabVip"
+        android:icon="@drawable/ic_tab_vip"
+        android:title="@string/main_tab_vip" />
+
+    <item
+        android:id="@+id/tabMine"
+        android:icon="@drawable/ic_tab_mine"
+        android:title="@string/main_tab_mine" />
+</menu>

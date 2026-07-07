@@ -65,15 +65,15 @@ class NetService : Service() {
         return null // 这是一个 Started Service，不支持绑定
     }
 
-    private fun createNotificationChannel() {
+    private fun createNotificationChannel() {// 创建通知渠道
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val serviceChannel = NotificationChannel(
+            val serviceChannel = NotificationChannel(// 通知渠道 ID
                 AppConstants.notificationChannelId,
                 "网络服务通知",
                 NotificationManager.IMPORTANCE_DEFAULT
             )
-            val manager = getSystemService(NotificationManager::class.java)
-            manager.createNotificationChannel(serviceChannel)
+            val manager = getSystemService(NotificationManager::class.java)// 获取系统服务
+            manager.createNotificationChannel(serviceChannel)//
         }
     }
 
