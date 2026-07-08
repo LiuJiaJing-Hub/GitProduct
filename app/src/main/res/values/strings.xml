@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">app-video-user</string>
+    <string name="app_name">云影视频</string>
     <string name="main_status_label">连接状态</string>
     <string name="main_connect">连接</string>
     <string name="main_disconnect">断开</string>
@@ -10,7 +10,6 @@
     <string name="main_message_hint">请输入待发送消息</string>
     <string name="main_received_label">消息日志</string>
     <string name="main_default_topic">video-room</string>
-
 
     <string name="action_settings">Settings</string>
     <string name="email">Email</string>
@@ -24,5 +23,4 @@
     <string name="main_tab_short_drama">短剧</string>
     <string name="main_tab_vip">会员</string>
     <string name="main_tab_mine">我的</string>
-
 </resources>

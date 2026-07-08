@@ -17,6 +17,7 @@ import com.app.video.user.domain.model.ChannelSelection
 import com.app.video.user.domain.model.ChannelVideoItem
 import com.app.video.user.domain.model.FilterOption
 import com.app.video.user.page.channel.adapter.ChannelVideoAdapter
+import com.app.video.user.page.detail.VideoDetailActivity
 import kotlinx.coroutines.launch
 
 class ChannelFragment : Fragment() {
@@ -38,9 +39,7 @@ class ChannelFragment : Fragment() {
     private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState.collect { state ->
-                    renderState(state)
-                }
+                viewModel.uiState.collect { state -> renderState(state) }
             }
         }
     }
@@ -51,35 +50,16 @@ class ChannelFragment : Fragment() {
         binding.tvChannelError.visibility = if (state.errorMessage.isNullOrBlank()) View.GONE else View.VISIBLE
         binding.tvChannelError.text = state.errorMessage.orEmpty()
 
-        renderFilterRow(
-            container = binding.categoryContainer,
-            options = state.categories,
-            selectedId = state.selection.categoryId,
-            onClick = viewModel::selectCategory
-        )
-        renderFilterRow(
-            container = binding.areaContainer,
-            options = state.areas,
-            selectedId = state.selection.areaId,
-            onClick = viewModel::selectArea
-        )
-        renderFilterRow(
-            container = binding.yearContainer,
-            options = state.years,
-            selectedId = state.selection.yearId,
-            onClick = viewModel::selectYear
-        )
-        renderFilterRow(
-            container = binding.sortContainer,
-            options = state.sorts,
-            selectedId = state.selection.sortId,
-            onClick = viewModel::selectSort
-        )
+        renderFilterRow(binding.categoryContainer, state.categories, state.selection.categoryId, viewModel::selectCategory)
+        renderFilterRow(binding.areaContainer, state.areas, state.selection.areaId, viewModel::selectArea)
+        renderFilterRow(binding.yearContainer, state.years, state.selection.yearId, viewModel::selectYear)
+        renderFilterRow(binding.sortContainer, state.sorts, state.selection.sortId, viewModel::selectSort)
         renderResultSummary(state.selection, state.videos)
         videoAdapter.submit(
             context = requireContext(),
             container = binding.channelVideoContainer,
-            videos = state.videos
+            videos = state.videos,
+            onClick = { item -> VideoDetailActivity.start(requireContext(), item.video.id) }
         )
     }
 
@@ -100,13 +80,13 @@ class ChannelFragment : Fragment() {
                 setPadding(dp(14), dp(8), dp(14), dp(8))
                 setOnClickListener { onClick(option.id) }
             }
-            val params = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                marginEnd = dp(8)
-            }
-            container.addView(view, params)
+            container.addView(
+                view,
+                LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply { marginEnd = dp(8) }
+            )
         }
     }
 
@@ -119,9 +99,7 @@ class ChannelFragment : Fragment() {
         binding.tvChannelResult.text = "共 ${videos.size} 部内容 · $sortName"
     }
 
-    private fun dp(value: Int): Int {
-        return (value * resources.displayMetrics.density).toInt()
-    }
+    private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
 
     override fun onDestroyView() {
         _binding = null

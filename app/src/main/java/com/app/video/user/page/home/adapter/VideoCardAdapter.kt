@@ -14,29 +14,27 @@ class VideoCardAdapter {
     fun submit(
         context: Context,
         container: LinearLayout,
-        videos: List<VideoItem>
+        videos: List<VideoItem>,
+        onClick: (VideoItem) -> Unit = {}
     ) {
         container.removeAllViews()
-        //chunked()把集合按指定大小等分切块
         videos.chunked(2).forEach { rowItems ->
             val row = LinearLayout(context).apply {
                 orientation = LinearLayout.HORIZONTAL
             }
-            val rowParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                bottomMargin = context.dp(12)
-            }
-            container.addView(row, rowParams)
+            container.addView(
+                row,
+                LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply { bottomMargin = context.dp(12) }
+            )
 
             rowItems.forEachIndexed { index, video ->
                 row.addView(
-                    createCard(context, video),
+                    createCard(context, video, onClick),
                     LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
-                        if (index == 0) {
-                            marginEnd = context.dp(10)
-                        }
+                        if (index == 0) marginEnd = context.dp(10)
                     }
                 )
             }
@@ -47,11 +45,16 @@ class VideoCardAdapter {
         }
     }
 
-    private fun createCard(context: Context, video: VideoItem): LinearLayout {
+    private fun createCard(
+        context: Context,
+        video: VideoItem,
+        onClick: (VideoItem) -> Unit
+    ): LinearLayout {
         return LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
             setBackgroundResource(R.drawable.bg_home_video_card)
             setPadding(context.dp(10), context.dp(10), context.dp(10), context.dp(10))
+            setOnClickListener { onClick(video) }
 
             addView(createCover(context, video))
             addView(createTitle(context, video.title))
@@ -95,9 +98,7 @@ class VideoCardAdapter {
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                topMargin = context.dp(10)
-            }
+            ).apply { topMargin = context.dp(10) }
         }
     }
 
@@ -110,9 +111,7 @@ class VideoCardAdapter {
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                topMargin = context.dp(4)
-            }
+            ).apply { topMargin = context.dp(4) }
         }
     }
 
@@ -125,17 +124,11 @@ class VideoCardAdapter {
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                topMargin = context.dp(6)
-            }
+            ).apply { topMargin = context.dp(6) }
         }
     }
 
-    private fun Context.dp(value: Int): Int {
-        return (value * resources.displayMetrics.density).toInt()
-    }
+    private fun Context.dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
 
-    private fun Context.getColorCompat(colorRes: Int): Int {
-        return resources.getColor(colorRes, null)
-    }
+    private fun Context.getColorCompat(colorRes: Int): Int = resources.getColor(colorRes, null)
 }

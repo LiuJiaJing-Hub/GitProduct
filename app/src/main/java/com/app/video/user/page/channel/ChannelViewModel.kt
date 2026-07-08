@@ -24,7 +24,6 @@ class ChannelViewModel : BaseViewModel() {
     private val repository = ChannelRepository()
     private val _uiState = MutableStateFlow(ChannelUiState(isLoading = true))
     val uiState = _uiState.asStateFlow()
-
     private var channelData: ChannelData? = null
 
     init {

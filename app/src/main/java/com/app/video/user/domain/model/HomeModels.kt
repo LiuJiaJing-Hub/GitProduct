@@ -19,6 +19,7 @@ data class VideoItem(
     val title: String,
     val subTitle: String,
     val coverUrl: String,
+    val categoryId: String,
     val category: String,
     val duration: String,
     val playCount: String,

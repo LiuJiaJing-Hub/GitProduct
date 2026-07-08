@@ -8,86 +8,22 @@ import com.app.video.user.domain.model.VideoItem
 import kotlinx.coroutines.delay
 
 class HomeRepository {
- //   suspend 挂起函数，表示该函数可以被挂起，从而允许其他协程在等待I/O操作完成时执行
+
     suspend fun getHomeData(): HomeData {
         delay(250)
 
         val hotVideos = listOf(
-            VideoItem(
-                id = "v_tv_001",
-                title = "风起长安",
-                subTitle = "全 40 集",
-                coverUrl = "",
-                category = "电视剧",
-                duration = "45:20",
-                playCount = "128万",
-                score = "8.8",
-                tag = "热播",
-                isVip = true
-            ),
-            VideoItem(
-                id = "v_movie_001",
-                title = "星河行动",
-                subTitle = "高燃科幻动作",
-                coverUrl = "",
-                category = "电影",
-                duration = "01:52:10",
-                playCount = "86万",
-                score = "8.5",
-                tag = "独播",
-                isVip = false
-            ),
-            VideoItem(
-                id = "v_show_001",
-                title = "周末喜剧夜",
-                subTitle = "第 2026-07-06 期",
-                coverUrl = "",
-                category = "综艺",
-                duration = "01:12:36",
-                playCount = "52万",
-                score = "8.2",
-                tag = "上新",
-                isVip = false
-            ),
-            VideoItem(
-                id = "v_anime_001",
-                title = "云端少年",
-                subTitle = "更新至 18 集",
-                coverUrl = "",
-                category = "动漫",
-                duration = "24:00",
-                playCount = "210万",
-                score = "9.1",
-                tag = "高分",
-                isVip = true
-            )
+            VideoItem("v_tv_001", "风起长安", "全 40 集", "", "tv", "电视剧", "45:20", "128万", "8.8", "热播", true),
+            VideoItem("v_movie_001", "星河行动", "高燃科幻动作", "", "movie", "电影", "01:52:10", "86万", "8.5", "独播", false),
+            VideoItem("v_show_001", "周末喜剧大会", "第 2026-07-06 期", "", "show", "综艺", "01:12:36", "52万", "8.2", "上新", false),
+            VideoItem("v_anime_001", "云端少年", "更新至 18 集", "", "anime", "动漫", "24:00", "210万", "9.1", "高分", true),
+            VideoItem("v_short_001", "闪婚日记", "80 集全", "", "short", "短剧", "02:30", "320万", "7.8", "短剧", false),
+            VideoItem("v_record_001", "山海寻味", "全 8 集", "", "record", "纪录片", "36:00", "33万", "9.0", "高分", false)
         )
 
         val vipVideos = listOf(
-            VideoItem(
-                id = "v_vip_001",
-                title = "暗夜档案",
-                subTitle = "会员抢先看 6 集",
-                coverUrl = "",
-                category = "悬疑",
-                duration = "42:18",
-                playCount = "73万",
-                score = "8.7",
-                tag = "VIP",
-                isVip = true
-            ),
-            VideoItem(
-                id = "v_vip_002",
-                title = "海岸线",
-                subTitle = "蓝光修复版",
-                coverUrl = "",
-                category = "电影",
-                duration = "01:38:09",
-                playCount = "39万",
-                score = "8.3",
-                tag = "会员",
-                isVip = true
-            )
+            VideoItem("v_vip_001", "暗夜档案", "会员抢先看 6 集", "", "tv", "悬疑", "42:18", "73万", "8.7", "VIP", true),
+            VideoItem("v_vip_002", "海岸线", "蓝光修复版", "", "movie", "电影", "01:38:09", "39万", "8.3", "会员", true)
         )
 
         return HomeData(
@@ -111,44 +47,12 @@ class HomeRepository {
                 ChannelItem("record", "纪录片")
             ),
             continueWatching = listOf(
-                VideoItem(
-                    id = "v_history_001",
-                    title = "昨日追剧",
-                    subTitle = "看到第 12 集 18:20",
-                    coverUrl = "",
-                    category = "继续观看",
-                    duration = "45:00",
-                    playCount = "继续",
-                    score = "8.6",
-                    tag = "历史",
-                    isVip = false
-                ),
-                VideoItem(
-                    id = "v_history_002",
-                    title = "轻喜人生",
-                    subTitle = "看到第 3 集 08:12",
-                    coverUrl = "",
-                    category = "继续观看",
-                    duration = "38:00",
-                    playCount = "继续",
-                    score = "8.0",
-                    tag = "历史",
-                    isVip = false
-                )
+                VideoItem("v_history_001", "昨日追剧", "看到第 12 集 18:20", "", "tv", "继续观看", "45:00", "继续", "8.6", "历史", false),
+                VideoItem("v_history_002", "轻喜人生", "看到第 3 集 08:12", "", "show", "继续观看", "38:00", "继续", "8.0", "历史", false)
             ),
             sections = listOf(
-                HomeSection(
-                    id = "hot",
-                    title = "正在热播",
-                    type = "grid",
-                    videos = hotVideos
-                ),
-                HomeSection(
-                    id = "vip",
-                    title = "VIP 精选",
-                    type = "grid",
-                    videos = vipVideos
-                )
+                HomeSection("hot", "正在热播", "grid", hotVideos),
+                HomeSection("vip", "VIP 精选", "grid", vipVideos)
             )
         )
     }

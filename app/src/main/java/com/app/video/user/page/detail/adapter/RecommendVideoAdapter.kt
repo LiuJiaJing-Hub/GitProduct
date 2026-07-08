@@ -1,0 +1,111 @@
+package com.app.video.user.page.detail.adapter
+
+import android.content.Context
+import android.graphics.Typeface
+import android.view.Gravity
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
+import com.app.video.user.R
+import com.app.video.user.domain.model.VideoItem
+
+/**
+ * 新增详情页推荐视频适配器，复用两列卡片样式并暴露点击事件。
+ */
+class RecommendVideoAdapter {
+
+    fun submit(
+        context: Context,
+        container: LinearLayout,
+        videos: List<VideoItem>,
+        onClick: (String) -> Unit
+    ) {
+        container.removeAllViews()
+        videos.chunked(2).forEach { rowItems ->
+            val row = LinearLayout(context).apply { orientation = LinearLayout.HORIZONTAL }
+            container.addView(
+                row,
+                LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply { bottomMargin = context.dp(12) }
+            )
+
+            rowItems.forEachIndexed { index, video ->
+                row.addView(
+                    createCard(context, video, onClick),
+                    LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
+                        if (index == 0) marginEnd = context.dp(10)
+                    }
+                )
+            }
+
+            if (rowItems.size == 1) {
+                row.addView(View(context), LinearLayout.LayoutParams(0, 1, 1f))
+            }
+        }
+    }
+
+    private fun createCard(
+        context: Context,
+        video: VideoItem,
+        onClick: (String) -> Unit
+    ): LinearLayout {
+        return LinearLayout(context).apply {
+            orientation = LinearLayout.VERTICAL
+            setBackgroundResource(R.drawable.bg_home_video_card)
+            setPadding(context.dp(10), context.dp(10), context.dp(10), context.dp(10))
+            setOnClickListener { onClick(video.id) }
+            addView(createCover(context, video))
+            addView(createTitle(context, video.title))
+            addView(createMeta(context, video))
+        }
+    }
+
+    private fun createCover(context: Context, video: VideoItem): TextView {
+        return TextView(context).apply {
+            text = if (video.isVip) "VIP" else video.tag
+            gravity = Gravity.BOTTOM or Gravity.START
+            textSize = 11f
+            setTypeface(typeface, Typeface.BOLD)
+            setTextColor(context.getColorCompat(R.color.white))
+            setBackgroundResource(R.drawable.bg_home_video_cover)
+            setPadding(context.dp(8), context.dp(8), context.dp(8), context.dp(8))
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                context.dp(96)
+            )
+        }
+    }
+
+    private fun createTitle(context: Context, title: String): TextView {
+        return TextView(context).apply {
+            text = title
+            textSize = 15f
+            maxLines = 1
+            setTypeface(typeface, Typeface.BOLD)
+            setTextColor(context.getColorCompat(R.color.text_primary))
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply { topMargin = context.dp(10) }
+        }
+    }
+
+    private fun createMeta(context: Context, video: VideoItem): TextView {
+        return TextView(context).apply {
+            text = "${video.category} · ${video.playCount} · ${video.score}分"
+            textSize = 12f
+            maxLines = 1
+            setTextColor(context.getColorCompat(R.color.text_secondary))
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply { topMargin = context.dp(4) }
+        }
+    }
+
+    private fun Context.dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
+
+    private fun Context.getColorCompat(colorRes: Int): Int = resources.getColor(colorRes, null)
+}
